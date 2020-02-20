@@ -1,0 +1,19 @@
+{
+  "name": "pg-express-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js",
+    "sync": "node ./data_layer/setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^7.18.1"
+  }
+}
