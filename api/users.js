@@ -1,5 +1,6 @@
 const express = require("express");
 const { readUser, createUser } = require("../data_layer/index");
+const { isValidUser } = require("../middleware/index");
 
 const usersRouter = express.Router();
 
@@ -15,11 +16,9 @@ usersRouter.get("/:email/:password", async (request, response, next) => {
   }
 });
 
-usersRouter.post("/", async (request, response, next) => {
+usersRouter.post("/", isValidUser, async (request, response, next) => {
   try {
-    const { firstName, lastName, email, password } = request.body;
-
-    const user = await createUser({ firstName, lastName, email, password });
+    const user = await createUser(request.user);
 
     response.json(user);
   } catch (error) {

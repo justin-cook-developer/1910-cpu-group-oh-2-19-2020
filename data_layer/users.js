@@ -1,5 +1,16 @@
 const { client } = require("./client");
 
+const doesUserExist = async (userId) => {
+  const { rows } = await client.query(
+    `
+      SELECT * FROM users WHERE id::text = $1;
+  `,
+    [userId]
+  );
+
+  return rows.length > 0;
+};
+
 const createUser = async ({ firstName, lastName, email, password }) => {
   const { rows } = await client.query(
     `
@@ -27,4 +38,5 @@ const readUser = async ({ email, password }) => {
 module.exports = {
   createUser,
   readUser,
+  doesUserExist,
 };
